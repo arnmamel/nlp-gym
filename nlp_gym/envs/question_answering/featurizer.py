@@ -7,9 +7,15 @@ from nlp_gym.envs.question_answering.observation import Observation, Observation
 
 class InformedFeaturizer(ObservationFeaturizer):
     def __init__(self, device: str = "cpu"):
+        embeddings_file_path = "/usr/src/sec-ai/app/models/embeddings/en-fasttext-news-300d-1M.vectors.npy"
+        vocab_file_path = "/usr/src/sec-ai/app/models/embeddings/en-fasttext-news-300d-1M"
         self.device = device
         self._setup_device()
-        self.doc_embeddings = DocumentPoolEmbeddings([WordEmbeddings("en")])
+        # Load embeddings from local files
+        word_embeddings = WordEmbeddings(embeddings_file_path)
+        # Use in DocumentPoolEmbeddings
+        self.doc_embeddings = DocumentPoolEmbeddings([word_embeddings])
+        # self.doc_embeddings = DocumentPoolEmbeddings([WordEmbeddings("en")])
 
     def init_on_reset(self, question: str, facts: List[str]):
         pass
