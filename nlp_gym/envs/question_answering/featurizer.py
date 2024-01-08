@@ -12,7 +12,7 @@ class InformedFeaturizer(ObservationFeaturizer):
         self.device = device
         self._setup_device()
         # Load embeddings from local files
-        word_embeddings = WordEmbeddings(embeddings_file_path)
+        word_embeddings = WordEmbeddings(vocab_file_path)
         # Use in DocumentPoolEmbeddings
         self.doc_embeddings = DocumentPoolEmbeddings([word_embeddings])
         # self.doc_embeddings = DocumentPoolEmbeddings([WordEmbeddings("en")])
